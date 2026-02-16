@@ -339,12 +339,11 @@ int b=*min_element(arr,arr+10); //returns the minimum element in the array
 cout<<b<<" "<<"minimum element in the array"<<endl;
 
 int p=*lower_bound(arr,arr+10,5); //returns the first element in the array which is greater than or equal to 5
-cout<<p<<" "<<"lower bound of 5 in the array"<<endl;
+
 
 
 int q=*upper_bound(arr,arr+10,5); //returns the first element in the array which is greater than 5
-cout<<q<<" "<<"upper bound of 5 in the array"<<endl;
-//err
+
 
 //if i have arr with elements 1 2 3 4 5 6 7 8 9  and i want 4 and 6 respectively then i can use lower_bound and upper_bound functions of array to get the lower bound and upper bound of 5 in the array and then use those bounds to get the required elements from the array:
 
@@ -356,6 +355,25 @@ cout<<y<<" "<<"upper bound of 5 in the array"<<endl;
 //to get element in array less than  5 we can use code :
 int z=*(lower_bound(arr,arr+10,5)-1); //returns the first element in the array which is less than 5
 cout<<z<<" "<<"element in array less than 5"<<endl;//outputs 4 because lower_bound function returns the first element in the array which is greater than or equal to 5 and we are subtracting 1 from that element to get the element which is less than 5 in the array
+
+
+
+
+
+
+
+//string permutations
+
+
+//permutaions of string "231" function explanation: next_permutation function takes a string as input and returns the next permutation of that string in lexicographical order. If there is no next permutation then it returns the first permutation of that string which is the smallest permutation of that string in lexicographical order.
+//lets say  str s={"2,3,1"}; then next_permutation(s.begin(),s.end()) will return "2,1,3" which is the next permutation of "2,3,1" in lexicographical order and if we call next_permutation(s.begin(),s.end()) again then it will return "3,1,2" which is the next permutation of "2,1,3" in lexicographical order and if we call next_permutation(s.begin(),s.end()) again then it will return "3,2,1" which is the next permutation of "3,1,2" in lexicographical order and if we call next_permutation(s.begin(),s.end()) again then it will return "1,2,3" which is the first permutation of "3,2,1" in lexicographical order because there is no next permutation of "3,2,1" in lexicographical order.
+//its used to generate all permutations of a string in lexicographical order by calling next_permutation function in a loop until we get the first permutation of the string again.
+//it can be used  for generating all permutations of a string in lexicographical order and also for generating all permutations of a string in reverse lexicographical order by using prev_permutation function instead of next_permutation function.
+string s="231";
+do
+{    cout<<s<<" "<<"permutation of string"<<endl;
+}
+while(next_permutation(s.begin(),s.end()));
 
 
 
