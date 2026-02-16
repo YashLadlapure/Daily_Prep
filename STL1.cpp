@@ -1,5 +1,13 @@
 #include <bits/stdc++.h>
+#include <string>
 using namespace std;
+
+
+
+
+
+
+
 int main()
 {
 
@@ -303,10 +311,53 @@ for(auto it:v)
 
 
 
-return 0;
+
+
+
+sort(arr,arr+10);
+//comp is not a built in function it is a user defined function which we have to define to sort the array in descending order
+//comp function takes two integers as input and returns true if first integer is greater than second integer and false otherwise
+//comp function is used as a comparator function in sort function to sort the array in descending order
+
+int c=9;
+int cnt=__builtin_popcount(c); //returns the number of set bits in binary representation of p
+//why error on p and how to fix it
+//error is because p is not defined in the scope of main function and we are trying to
+cout<<cnt<<" "<<"number of set bits in binary representation of c"<<endl;
+//outputs 2 because binary representation of 9 is 1001 which has 2 set bits
+
+//cnt=32 when c=-1 because binary representation of -1 is 11111111 11111111 11111111 11111111 which has 32 set bits
 
 
 
 
 
+int a=*max_element(arr,arr+10); //returns the maximum element in the array
+cout<<a<<" "<<"maximum element in the array"<<endl;
+
+int b=*min_element(arr,arr+10); //returns the minimum element in the array
+cout<<b<<" "<<"minimum element in the array"<<endl;
+
+int p=*lower_bound(arr,arr+10,5); //returns the first element in the array which is greater than or equal to 5
+cout<<p<<" "<<"lower bound of 5 in the array"<<endl;
+
+
+int q=*upper_bound(arr,arr+10,5); //returns the first element in the array which is greater than 5
+cout<<q<<" "<<"upper bound of 5 in the array"<<endl;
+//err
+
+//if i have arr with elements 1 2 3 4 5 6 7 8 9  and i want 4 and 6 respectively then i can use lower_bound and upper_bound functions of array to get the lower bound and upper bound of 5 in the array and then use those bounds to get the required elements from the array:
+
+int x=*lower_bound(arr,arr+10,5); //returns the first element in the array which is greater than or equal to 5
+cout<<x<<" "<<"lower bound of 5 in the array"<<endl;
+int y=*upper_bound(arr,arr+10,5); //returns the first element in the array which is greater than 5
+cout<<y<<" "<<"upper bound of 5 in the array"<<endl;
+
+//to get element in array less than  5 we can use code :
+int z=*(lower_bound(arr,arr+10,5)-1); //returns the first element in the array which is less than 5
+cout<<z<<" "<<"element in array less than 5"<<endl;//outputs 4 because lower_bound function returns the first element in the array which is greater than or equal to 5 and we are subtracting 1 from that element to get the element which is less than 5 in the array
+
+
+
+    return 0;
 }
