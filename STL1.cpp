@@ -260,8 +260,9 @@ for(auto it=mp.lower_bound(4);it!=mp.upper_bound(8);it++)
 
 //so auto it: mp  can only be used to iterate through all elements of map but if we want to iterate through a particular range of map elements we can use auto it=mp.lower_bound(key) and auto it=mp.upper_bound(key) to get the range of elements we want to iterate through and then use for loop to iterate through those elements
 
-
-
+// code for sum of full array with stl :
+int sum=accumulate(arr,arr+10,0); //returns the sum of all elements in the array
+//time complexity of accumulate function is O(n) because it iterates through all elements of array once and performs O(1) operations for each element of array to calculate the sum of all elements in the array
 
 
 
@@ -286,6 +287,22 @@ for(auto it:mmp)
 
 
 
+//unordered map
+unordered_map<int,int> ump;
+
+int p;
+//we can not change index 
+ump.insert({2,3});
+ump.insert({4,5});
+ump.insert({6,7});
+
+//prints full unordered map
+for(auto it:ump)
+{
+    cout<<it.first<<" "<<it.second<<" "<<"unordered map element"<<endl;
+}
+
+//if we are using unodered map in prefix sum problem then we can use unordered map to store prefix sum and its index because unordered map provides average case O(1) time complexity for search, insert and delete operations and it will help us to find the required prefix sum in O(1) time complexity and overall time complexity of prefix sum problem will be O(n) because we are iterating through the array once and performing O(1) operations for each element of array using unordered map.
 
 //Sorting algorithm
 sort(arr,arr+10); //sorts the array in ascending order
@@ -375,7 +392,274 @@ do
 }
 while(next_permutation(s.begin(),s.end()));
 
+//for gertting all possible combinations of a string we can use next_permutation function in a loop until we get the first permutation of the string again and in each iteration we can check if the current permutation is a valid combination or not and if it is a valid combination then we can print that combination.
+//example: we want to get all possible combinations of string "abc" then we can use code:
+string str="abc";
+do
+{
+    //check if current permutation is a valid combination or not
+    //if it is a valid combination then print that combination
+    cout<<str<<" "<<"combination of string"<<endl;
+}
+while(next_permutation(str.begin(),str.end()));
+//it wont print all possible combinations of string "abc" because next_permutation function generates permutations of string in lexicographical order and not all permutations of string "abc" are valid combinations of string "abc" because some permutations of string "abc" may have repeated characters which are not valid combinations of string "abc" and some permutations of string "abc" may have characters in different order which are also not valid combinations of string "abc" so we need to check if the current permutation is a valid combination or not before printing that combination.
+
+//for getting longest valid substring without repeating characters we can use next_permutation function in a loop until we get the first permutation of the string again and in each iteration we can check if the current permutation is a valid combination or not and if it is a valid combination then we can check if the length of that combination is greater than the length of longest valid substring without repeating characters we have found so far and if it is greater than the length of longest valid substring without repeating characters we have found so far then we can update longest valid substring without repeating characters with that combination and at the end of loop we will get longest valid substring without repeating characters in the string.
+//code for getting longest valid substring without repeating characters using next_permutation function:
+string str2="abcabcbb";
+string longest_valid_substring="";
+do
+{
+    //check if current permutation is a valid combination or not
+    //if it is a valid combination then check if the length of that combination is greater than the length of longest valid substring without repeating characters we have found so far and if it is greater than the length of longest valid substring without repeating characters we have found so far then update longest valid substring without repeating characters with that combination
+}
+while(next_permutation(str2.begin(),str2.end()));
+
+
+//full code for getting longest valid substring without repeating characters using next_permutation function:
+string str3="abcabcbb";
+string longest_valid_substring1="";
+do
+{
+    //check if current permutation is a valid combination or not
+    set<char> s;
+    bool is_valid_combination=true;
+    for(auto it:str3)
+    {
+        if(s.find(it)!=s.end())
+        {
+            is_valid_combination=false;
+            break;
+        }
+        s.insert(it);
+        
+    }
+    //if it is a valid combination then check if the length of that combination is greater than the length of longest valid substring without repeating characters we have found so far and if it is greater than the length of longest valid substring without repeating characters we have found so far then update longest valid substring without repeating characters with that combination
+    if(is_valid_combination)
+    {
+        if(str3.length()>longest_valid_substring1.length())
+        {
+            longest_valid_substring1=str3;
+        }
+    }
+}
+while(next_permutation(str3.begin(),str3.end()));
+
+
+
+
+
+//outputs abc acb bac bca cab cba because these are all possible combinations of string "abc" in lexicographical order
+//to print all possible combinations of string "abc" in reverse lexicographical order we can use code:
+string str1="abc";
+do
+
+{
+    //check if current permutation is a valid combination or not
+
+    //if it is a valid combination then print that combination
+    cout<<str1<<" "<<"combination of string in reverse lexicographical order"<<endl;
+}
+while(prev_permutation(str1.begin(),str1.end()));
+
+
+
+
+//for longest valid substring without repeating characters we can use code:
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+       int n=s.size();
+       int i=0;
+       int  max_len=0;
+vector<bool> pre(256,-false);
+       for(int j=0;j<n;j++)
+       {
+             while(pre[s[j]])
+             {
+                    pre[s[i]]=false;
+                    i++;
+
+             }
+                pre[s[j]]=true;
+                int len=j-i+1;
+                max_len=max(max_len,len);
+
+       }
+
+         return max_len;
+
+
+
+
+
+    }
+};
+
+
+
+
+/*Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
+
+The testcases will be generated such that the answer is unique.
+
+ 
+
+Example 1:
+
+Input: s = "ADOBECODEBANC", t = "ABC"
+Output: "BANC"
+Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.*/
+
+/*class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+       int n=s.size();
+       int i=0;
+       int  max_len=0;
+vector<bool> pre(256,-false);
+       for(int j=0;j<n;j++)
+       {
+             while(pre[s[j]])
+             {
+                    pre[s[i]]=false;
+                    i++;
+
+             }
+                pre[s[j]]=true;
+                int len=j-i+1;
+                max_len=max(max_len,len);
+
+       }
+
+         return max_len;
+
+
+
+
+
+    }
+};*/
+
+// code with exxact same logic :
+
+//
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        int n=s.size();
+        int m=t.size();
+        if(m>n)
+        {
+            return "";
+        }
+        vector<int> freq(256,0);
+        for(int i=0;i<m;i++)
+        {
+            freq[t[i]]++;
+        }
+        int count=m;
+        int i=0;
+        int min_len=INT_MAX;
+        string ans="";
+        for(int j=0;j<n;j++)
+        {
+            if(freq[s[j]]>0)
+            {
+                count--;
+            }
+            freq[s[j]]--;
+            while(count==0)
+            {
+                if(j-i+1<min_len)
+                {
+                    min_len=j-i+1;
+                    ans=s.substr(i,min_len);
+                }
+                freq[s[i]]++;
+                if(freq[s[i]]>0)
+                {
+                    count++;
+                }
+                i++;
+            }
+        }
+        return ans;
+
+    
+/*book. You also have an integer k representing the number of students. The task is to allocate books to each student such that:
+
+Each student receives atleast one book.
+Each student is assigned a contiguous sequence of books.
+No book is assigned to more than one student.
+The objective is to minimize the maximum number of pages assigned to any student. In other words, out of all possible allocations, find the arrangement where the student who receives the most pages still has the smallest possible maximum.
+
+Note: If it is not possible to allocate books to all students, return -1.
+
+Examples:
+
+Input: arr[] = [12, 34, 67, 90], k = 2
+Output: 113
+Explanation: Allocation can be done in following ways:
+=> [12] and [34, 67, 90] Maximum Pages = 191
+=> [12, 34] and [67, 90] Maximum Pages = 157
+=> [12, 34, 67] and [90] Maximum Pages = 113.
+The third combination has the minimum pages assigned to a student which is 113.
+Input: arr[] = [15, 17, 20], k = 5
+Output: -1
+Explanation: Since there are more students than total books, it's impossible to allocate a book to each student.*/
+
+//full code for book allocation problem using binary search:
+/*class Solution {
+public:   bool isPossible(vector<int>& arr, int k, int mid)
+    {
+        int student_count=1;
+        int page_sum=0;
+        for(int i=0;i<arr.size();i++)
+        {
+            if(page_sum+arr[i]>mid)
+            {
+                student_count++;
+                page_sum=arr[i];
+                if(student_count>k)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                page_sum+=arr[i];
+            }
+        }
+        return true;
+    }
+    int findPages(vector<int>& arr, int k) {
+        int n=arr.size();
+        if(n<k)
+        {
+            return -1;
+        }
+        int start=*max_element(arr.begin(),arr.end());
+        int end=accumulate(arr.begin(),arr.end(),0);
+        int ans=-1;
+        while(start<=end)
+        {
+            int mid=start+(end-start)/2;
+            if(isPossible(arr,k,mid))
+            {
+                ans=mid;
+                end=mid-1;
+            }
+            else
+            {
+                start=mid+1;
+            }
+        }
+        return ans;
+
+    }*/
 
 
     return 0;
 }
+
